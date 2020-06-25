@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--配置环绕通知-->
+    <bean id="acconutService" class="com.alankay.Serviceimpl.AccountServiceImpl" ></bean>
+
+    <bean id="logger" class="com.alankay.Utils.Logger"></bean>
+    <aop:config>
+        <aop:pointcut id="pt1" expression="execution( * com.alankay.Serviceimpl.*.*(..))"></aop:pointcut>
+        <aop:aspect id="LogActive"  ref="logger">
+            <aop:around method="aroundPrintLog" pointcut-ref="pt1"></aop:around>
+        </aop:aspect>
+    </aop:config>
+</beans>
